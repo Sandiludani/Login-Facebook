@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login dengan Facebook</title>
+</head>
+<body>
+    <h1>Login dengan Facebook</h1>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_APP_ID', // https://www.facebook.com/MetaforDevelopers
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+        };
+
+        function login() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    FB.api('/me', function(response) {
+                        console.log('Good to see you, ' + response.name + '.');
+                    });
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            });
+        }
+    </script>
+    <button onclick="login()">Login dengan Facebook</button>
+</body>
+</html>
